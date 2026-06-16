@@ -1,278 +1,99 @@
-# NPC Controller (Native FiveM)
+# ms_npcremover
 
-A lightweight FiveM resource built entirely with GTA V/FiveM natives. This script allows you to control and remove ambient NPCs, parked vehicles, scenario peds, emergency service AI, and other world population elements.
+A lightweight and configurable FiveM resource designed to reduce or completely remove ambient GTA V population, including pedestrians, traffic vehicles, parked vehicles, scenario peds, and emergency service AI.
 
-No framework required.
+Built using native FiveM functions with no framework dependencies.
 
 ## Features
 
-- Remove walking NPCs
+- Remove ambient pedestrians
 - Remove NPC drivers
-- Remove parked NPC vehicles
-- Remove scenario NPCs (sitting, smoking, talking, sweeping, etc.)
-- Remove random boats
-- Remove random aircraft
-- Disable police AI
-- Disable ambulance AI
-- Disable fire department AI
-- NPC whitelist system
+- Remove parked vehicles
+- Remove scenario peds
+- Disable police AI spawning
+- Disable ambulance AI dispatches
+- Disable fire department AI dispatches
+- Control vehicle density
+- Control pedestrian density
 - Fully configurable
-- Optimized for performance
+- Lightweight and optimized
 - Framework independent
 
----
+## Dependencies
+
+None.
+
+This resource works as a standalone script and does not require:
+
+- QBCore
+- QBX
+- ESX
+- ox_lib
+- ox_inventory
+
+## Installation
+
+### 1. Download the Resource
+
+Place the resource inside your server's resources folder.
+
+```text
+resources/[standalone]/ms_npcremover
+```
+
+### 2. Add to server.cfg
+
+```cfg
+ensure ms_npcremover
+```
+
+### 3. Restart Your Server
 
 ## Resource Structure
 
 ```text
 ms_npcremover/
 │
-├── fxmanifest.lua
-├── shared/shared.lua
-└── client/client.lua
+├── client/
+│   └── client.lua
+│
+├── shared/
+│   └── shared.lua
+│
+└── fxmanifest.lua
 ```
 
----
+## Configuration
 
-## Installation
-
-### 1. Create the Resource Folder
-
-```text
-resources/[standalone]/npc_controller
-```
-
-### 2. Add the Script Files
-
-Place all script files inside the resource folder.
-
-### 3. Add to server.cfg
-
-```cfg
-ensure npc_controller
-```
-
-### 4. Restart the Server
-
----
-
-# Configuration
-
-## config.lua
+All settings can be configured inside:
 
 ```lua
-Config = {}
+shared/shared.lua
+```
 
--- Density values (0.0 - 1.0)
+Example settings may include:
 
+```lua
 Config.VehicleDensity = 0.0
 Config.PedDensity = 0.0
 Config.RandomVehicleDensity = 0.0
 Config.ParkedVehicleDensity = 0.0
 Config.ScenarioPedDensity = 0.0
-
--- Disable Emergency Services
-
-Config.DisableCops = true
-Config.DisableAmbulance = true
-Config.DisableFireDepartment = true
-
--- Cleanup spawned entities
-
-Config.DeleteNearbyPeds = true
-Config.DeleteNearbyVehicles = true
-
--- Cleanup radius
-
-Config.CleanupRadius = 150.0
-
--- Allowed ped models
-
-Config.AllowedPeds = {
-    -- `s_m_y_cop_01`,
-    -- `s_m_m_paramedic_01`,
-}
 ```
 
----
-
-# Density Settings
-
-## Density Scale
+### Density Values
 
 | Value | Description |
-|---------|-------------|
-| 0.0 | No spawning |
-| 0.1 | Very low |
+| ------- | ------- |
+| 0.0 | Disabled |
+| 0.1 | Very Low |
 | 0.3 | Low |
 | 0.5 | Medium |
-| 1.0 | GTA V default |
+| 1.0 | GTA V Default |
 
----
+## Recommended Configurations
 
-## Vehicle Density
-
-```lua
-Config.VehicleDensity = 0.0
-```
-
-Controls the amount of traffic vehicles driving around the map.
-
----
-
-## Ped Density
-
-```lua
-Config.PedDensity = 0.0
-```
-
-Controls the amount of ambient walking pedestrians.
-
----
-
-## Random Vehicle Density
-
-```lua
-Config.RandomVehicleDensity = 0.0
-```
-
-Controls random traffic generation.
-
----
-
-## Parked Vehicle Density
-
-```lua
-Config.ParkedVehicleDensity = 0.0
-```
-
-Controls parked vehicles generated throughout the map.
-
----
-
-## Scenario Ped Density
-
-```lua
-Config.ScenarioPedDensity = 0.0
-```
-
-Controls NPCs performing world scenarios.
-
-Examples:
-
-- Sitting on benches
-- Smoking
-- Talking with other NPCs
-- Cleaning sidewalks
-- Repairing vehicles
-- Using phones
-
----
-
-# Emergency Services
-
-## Disable Police AI
-
-```lua
-Config.DisableCops = true
-```
-
-Disables random police AI spawning and patrols.
-
----
-
-## Disable Ambulance AI
-
-```lua
-Config.DisableAmbulance = true
-```
-
-Disables ambulance AI dispatches.
-
----
-
-## Disable Fire Department AI
-
-```lua
-Config.DisableFireDepartment = true
-```
-
-Disables fire department AI dispatches.
-
----
-
-# Cleanup System
-
-## Ped Cleanup
-
-```lua
-Config.DeleteNearbyPeds = true
-```
-
-Deletes nearby non-player NPCs.
-
----
-
-## Vehicle Cleanup
-
-```lua
-Config.DeleteNearbyVehicles = true
-```
-
-Deletes nearby vehicles driven by NPCs.
-
----
-
-## Cleanup Radius
-
-```lua
-Config.CleanupRadius = 150.0
-```
-
-Defines the cleanup range around players.
-
-Examples:
-
-```lua
-50.0
-```
-
-Small cleanup area.
-
-```lua
-150.0
-```
-
-Recommended for roleplay servers.
-
-```lua
-300.0
-```
-
-Large cleanup area with higher processing cost.
-
----
-
-# NPC Whitelist
-
-Allow specific NPC models to remain in the world.
-
-Example:
-
-```lua
-Config.AllowedPeds = {
-    `s_m_y_cop_01`,
-    `s_m_m_paramedic_01`,
-}
-```
-
-These NPCs will not be deleted by the cleanup system.
-
----
-
-# Example Configurations
-
-## Completely Empty World
+### Empty World
 
 ```lua
 Config.VehicleDensity = 0.0
@@ -286,12 +107,10 @@ Result:
 
 - No traffic
 - No pedestrians
-- No scenario NPCs
 - No parked vehicles
+- No scenario NPCs
 
----
-
-## Semi-Realistic Population
+### Light Population
 
 ```lua
 Config.VehicleDensity = 0.2
@@ -303,28 +122,13 @@ Config.ScenarioPedDensity = 0.1
 
 Result:
 
-- Light traffic
-- Some pedestrians
-- Better performance than vanilla GTA V
+- Reduced city population
+- Better server immersion
+- Improved client performance
 
----
+## Performance
 
-## Police Only
-
-```lua
-Config.AllowedPeds = {
-    `s_m_y_cop_01`,
-}
-```
-
-Result:
-
-- Most NPCs are removed
-- Police NPCs remain active
-
----
-
-# Performance
+This resource is designed to be extremely lightweight.
 
 Expected resource usage:
 
@@ -332,34 +136,39 @@ Expected resource usage:
 0.00 ms - 0.02 ms
 ```
 
-Actual usage depends on the number of entities around players and server population.
+Performance may vary depending on player count and nearby entities.
 
----
+## Compatibility
 
-# Compatibility
+Compatible with:
 
 - OneSync
+- OneSync Infinity
 - QBCore
 - QBX
 - ESX
-- Ox Lib
 - Standalone Servers
 
+## Version
+
+Current Version:
+
+```text
+1.0.0
+```
+
+## Author
+
+**Maula-Store**
+
+## License
+
+This project is free to use, modify, and distribute.
+
+## Support
+
+If you encounter any issues or have suggestions for improvements, please open an issue on the GitHub repository or You can open ticket on my discord server thanks...
+
 ---
 
-# Future Improvements
-
-Potential additions:
-
-- Zone-based population control
-- NPC blacklist system
-- Vehicle model whitelist
-- Dynamic density adjustments
-- Population profiles (City, RP, Zombie, Survival)
-- Server-side population management
-
----
-
-# License
-
-Free to use, modify, and distribute.
+Made with ❤️ by Maula-Store
