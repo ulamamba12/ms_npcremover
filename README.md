@@ -339,11 +339,9 @@ Actual usage depends on the number of entities around players and server populat
 # Compatibility
 
 - OneSync
-- OneSync Infinity
 - QBCore
 - QBX
 - ESX
-- Ox Inventory
 - Ox Lib
 - Standalone Servers
 
