@@ -10,9 +10,10 @@ Built using native FiveM functions with no framework dependencies.
 - Remove NPC drivers
 - Remove parked vehicles
 - Remove scenario peds
-- Disable police AI spawning
+- Disable police AI spawning (cars, helis, bikes, roadblocks, boats)
 - Disable ambulance AI dispatches
 - Disable fire department AI dispatches
+- Disable SWAT, army and gang AI dispatches
 - Control vehicle density
 - Control pedestrian density
 - Fully configurable

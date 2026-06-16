@@ -9,9 +9,12 @@ Config.ParkedVehicleDensity = 0.0
 Config.ScenarioPedDensity = 0.3
 
 -- Disable emergency services
-Config.DisableCops = true
-Config.DisableAmbulance = true
-Config.DisableFireDepartment = true
+Config.DisableCops = true            -- Police: cars, helis, bikes, requests, roadblocks, boats
+Config.DisableAmbulance = true       -- Ambulance department
+Config.DisableFireDepartment = true  -- Fire department
+Config.DisableSwat = true            -- SWAT: automobile + helicopter
+Config.DisableArmy = true            -- Army vehicles
+Config.DisableGangs = false          -- Gang backup
 
 -- Remove generated NPCs
 Config.DeleteNearbyPeds = false
